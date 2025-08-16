@@ -26,14 +26,3 @@ li {
 a {
 	color: #227;
 }
-summary {
-	text-decoration: underline;
-}
-details {
-	background-color: #ddd;
-
-	border: 3px solid #bbb;
-	border-radius: 5px;
-
-	padding: 5px;
-}
