@@ -28,3 +28,25 @@ li {
 a {
 	color: #227;
 }
+
+#scroll_to_top {
+	position: fixed;
+
+	bottom: 30px;
+	right: 50px;
+
+	color: #000;
+
+	background-color: #ddd;
+
+	border: 3px solid #bbb;
+	border-radius: 5px;
+
+	padding: 8px;
+}
+#scroll_to_top:hover {
+	box-shadow: 0 5px 8px 0 #ccc;
+}
+#scroll_to_top:active {
+	background-color: #ccc;
+}
