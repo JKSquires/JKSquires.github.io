@@ -60,15 +60,20 @@ pre {
 	border-spacing: 1em 0;
 }
 .left_matrix_bracket {
-	border-bottom: 1px #000 solid;
-	border-top: 1px #000 solid;
-	border-left: 1px #000 solid;
+	border: 1px #000 solid;
+	border-right: none;
 }
-
+.left_matrix_bracket_dm {
+	border: 1px #fff solid;
+	border-right: none;
+}
 .right_matrix_bracket {
-	border-bottom: 1px #000 solid;
-	border-top: 1px #000 solid;
-	border-right: 1px #000 solid;
+	border: 1px #000 solid;
+	border-left: none;
+}
+.right_matrix_bracket_dm {
+	border: 1px #fff solid;
+	border-left: none;
 }
 
 #scroll_to_top {

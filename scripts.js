@@ -22,5 +22,12 @@ function toggleDarkMode() {
 		
 		all_elements[i].style.color = "rgb(from " + element_style.color + " calc(255 - r) calc(255 - g) calc(255 - b))";
 		all_elements[i].style.backgroundColor = "rgb(from " + element_style.backgroundColor + " calc(255 - r) calc(255 - g) calc(255 - b))";
+		all_elements[i].style.borderColor = "rgb(from " + element_style.borderColor + " calc(255 - r) calc(255 - g) calc(255 - b))";
+
+		if (all_elements[i].className === "left_matrix_bracket") {
+			all_elements[i].className = "left_matrix_bracket_dm";
+		} else if (all_elements[i].className === "right_matrix_bracket") {
+			all_elements[i].className = "right_matrix_bracket_dm";
+		}
 	}
 }

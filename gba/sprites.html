@@ -4,7 +4,7 @@
 <title>Sprites and OAM</title>
 
 <link rel="icon" type="image/png" href="/icon.png">
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 <button onClick="handleToggleDarkModeButton()">Toggle Dark Mode</button>
@@ -917,9 +917,14 @@ b loop
 	</code></pre>
 </details>
 
+<br>
+<hr>
+
+<p>I use localStorage to store if a user toggles dark mode on my site, but only once they have clicked the button. <strong>If you want to clear localStorage:</strong> <button onClick="localStorage.clear();location.reload();">click here.</button></p>
+
 <button id="scroll_to_top" onClick="location.href='#';">Scroll<br>to top</button>
-<script src="../scripts.js"></script>
 <script src="./color_code.js"></script>
+<script src="/scripts.js"></script>
 </body>
 </html>
 
