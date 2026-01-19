@@ -16,6 +16,10 @@ body {
 	margin: auto;
 	padding: 2em;
 }
+p {
+	color: #000;
+	font-size: 16px;
+}
 button {
 	color: #fff;
 	font-family: "Courier", monospace;
@@ -27,6 +31,44 @@ li {
 }
 a {
 	color: #227;
+}
+dt {
+	font-weight: bold;
+}
+code {
+	display: inline-block;
+
+	background-color: #ddd;
+
+	font-family: "Courier New", monospace;
+	font-size: 14px;
+}
+pre {
+	white-space: pre-wrap;
+}
+
+.wrap_anywhere {
+	word-wrap: anywhere;
+}
+.table_with_borders {
+	border-collapse: collapse;
+}
+.table_with_borders td, th {
+	border: 1px solid #000;
+}
+.matrix {
+	border-spacing: 1em 0;
+}
+.left_matrix_bracket {
+	border-bottom: 1px #000 solid;
+	border-top: 1px #000 solid;
+	border-left: 1px #000 solid;
+}
+
+.right_matrix_bracket {
+	border-bottom: 1px #000 solid;
+	border-top: 1px #000 solid;
+	border-right: 1px #000 solid;
 }
 
 #scroll_to_top {
