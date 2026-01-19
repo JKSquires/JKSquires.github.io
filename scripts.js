@@ -5,13 +5,15 @@ if (localStorage.getItem("dark_mode") == "t") {
 function handleToggleDarkModeButton() {
 	dark_mode_toggled = localStorage.getItem("dark_mode");
 	if (dark_mode_toggled == "t") {
-		dark_mode_toggled = "f";
-	} else { // handles null and "f"
+		localStorage.clear();
+		location.reload();
+	} else {
 		dark_mode_toggled = "t";
-	}
-	localStorage.setItem("dark_mode", dark_mode_toggled);
 
-	toggleDarkMode();	
+		localStorage.setItem("dark_mode", dark_mode_toggled);
+
+		toggleDarkMode();	
+	}
 }
 
 function toggleDarkMode() {
