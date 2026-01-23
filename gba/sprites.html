@@ -13,7 +13,7 @@
 
 <p><em>Don't just take what I say here as fact, double check it yourself (especially with 256-color sprites because I don't have as much experience with it compared to 16-color sprites)! I've just written down what I've learned and/or can figure out, so I may have missed things!</em></p>
 
-<p>For any ARM assembly code snippit, know that I use the <a href="https://www.gbadev.org/tools.php?showinfo=192">Goldroad</a> assembler, so the syntax may be different from what you're used to. That does <em>not</em> mean you also have to use it.</p>
+<p>For any ARM assembly code snippit, know that I use the <a href="https://www.gbadev.org/tools.php?showinfo=192" target="_blank" rel="noopener noreferrer">Goldroad</a> assembler, so the syntax may be different from what you're used to. That does <em>not</em> mean you also have to use it.</p>
 
 <hr>
 
@@ -49,7 +49,7 @@
 <hr>
 
 <p>I'll just kind of explain things in the order I tend to use when creating objects.</p>
-<p>I like to start off with making the sprites and palettes just to get all the sizing and looks figured out first. You can use <a href="https://jksquires.github.io/gba-obj-sprite-maker">my tool</a> to create them if you don't have another tool and don't want to make them by hand, but I will still go over how the palette and sprite data is laid out.</p>
+<p>I like to start off with making the sprites and palettes just to get all the sizing and looks figured out first. You can use <a href="https://jksquires.github.io/gba-obj-sprite-maker" target="_blank" rel="noopener noreferrer">my tool</a> to create them if you don't have another tool and don't want to make them by hand, but I will still go over how the palette and sprite data is laid out.</p>
 <p>I'll cover 16-color palettes and sprites because I've never worked with 256-color palettes and sprites before on the GBA, so I won't cover them here (or at least for now).</p>
 <p>Also, for this entire thing, unless otherwise specified, I will be treating it all as if I were to be using modes 0-2, so object character data in VRAM is at adresses <code>0x6010000-0x6017FFF</code>. If you're using modes 3-5, I think the addresses would instead be <code>0x6014000-0x6017FFF</code>.</p>
 
