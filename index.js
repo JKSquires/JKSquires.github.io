@@ -73,7 +73,7 @@ getLangs().then((stat) => {
 		text += "<tr><td>" + sum_langs_sort[i][0] + "</td><td><strong>" + percent + "%</strong></td><td>" + sum_langs_sort[i][1] + "</td></tr>";
 	}
 
-	if (!stat.failed) {
+	if (!stat.failed || localStorage.getItem("langs_last_accessed")) {
 		text += "<tr><td>--</td><td><strong>100%</strong></td><td>" + total_bytes + "</td>";
 	}
 
