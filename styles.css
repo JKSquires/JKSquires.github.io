@@ -75,6 +75,19 @@ pre {
 	border: 1px #fff solid;
 	border-left: none;
 }
+.line_table, .line_table_dm {
+	border-collapse: collapse;
+}
+.line_table td, .line_table th {
+	border: 1px #000 solid;
+
+	padding: 8px;
+}
+.line_table_dm td, .line_table_dm th {
+	border: 1px #fff solid;
+
+	padding: 8px;
+}
 
 #scroll_to_top {
 	position: fixed;
