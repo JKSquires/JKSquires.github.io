@@ -73,7 +73,9 @@ getLangs().then((stat) => {
 		text += "<tr><td>" + sum_langs_sort[i][0] + "</td><td><strong>" + percent + "%</strong></td><td>" + sum_langs_sort[i][1] + "</td></tr>";
 	}
 
-	text += "<tr><td>--</td><td><strong>100%</strong></td><td>" + total_bytes + "</td>";
+	if (!stat.failed) {
+		text += "<tr><td>--</td><td><strong>100%</strong></td><td>" + total_bytes + "</td>";
+	}
 
 	lang_disp.innerHTML = text;
 });
