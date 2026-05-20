@@ -9,22 +9,24 @@ async function getLangs() {
 		const repos = await repo_api.json();
 
 		for (let i = 0; i < repos.length; i++) {
-			const lang_api = await fetch("https://api.github.com/repos/JKSquires/" + repos[i].name + "/languages");
+			if (repos[i].language) {
+				const lang_api = await fetch("https://api.github.com/repos/JKSquires/" + repos[i].name + "/languages");
 
-			if (lang_api.ok) {
-				const langs = await lang_api.json();
+				if (lang_api.ok) {
+					const langs = await lang_api.json();
 
-				for (const lang in langs) {
-					if (sum_langs[lang]) {
-						sum_langs[lang] += langs[lang];
-					} else {
-						sum_langs[lang] = langs[lang]
+					for (const lang in langs) {
+						if (sum_langs[lang]) {
+							sum_langs[lang] += langs[lang];
+						} else {
+							sum_langs[lang] = langs[lang]
+						}
 					}
-				}
-			} else {
-				failed = true;
+				} else {
+					failed = true;
 
-				break;
+					break;
+				}
 			}
 		}
 	} else {
