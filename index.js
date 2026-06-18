@@ -8,24 +8,26 @@ async function getLangs() {
 	if (repo_api.ok) {
 		const repos = await repo_api.json();
 
-		for (let i = 0; i < repos.length; i++) {
-			if (repos[i].language) {
-				const lang_api = await fetch("https://api.github.com/repos/JKSquires/" + repos[i].name + "/languages");
-
-				if (lang_api.ok) {
-					const langs = await lang_api.json();
-
-					for (const lang in langs) {
-						if (sum_langs[lang]) {
-							sum_langs[lang] += langs[lang];
-						} else {
-							sum_langs[lang] = langs[lang]
-						}
+		const lang_data = await Promise.all(repos.map((repo) =>
+			fetch("https://api.github.com/repos/JKSquires/" + repo.name + "/languages")
+				.then((res) => {
+					if (res.ok) {
+						return res.json()
+					} else {
+						failed = true;
+						return null;
 					}
-				} else {
-					failed = true;
+				})
+		));
 
-					break;
+		if (!failed) {
+			for (const langs of lang_data) {
+				for (const lang in langs) {
+					if (sum_langs[lang]) {
+						sum_langs[lang] += langs[lang];
+					} else {
+						sum_langs[lang] = langs[lang]
+					}
 				}
 			}
 		}
@@ -57,26 +59,27 @@ getLangs().then((stat) => {
 		sum_langs = stat.sum_langs;
 	}
 
-	let sum_langs_sort = [];
-	for (const lang in sum_langs) {
-		sum_langs_sort.push([lang, sum_langs[lang]]);
-	}
-	sum_langs_sort = sum_langs_sort.sort((a, b) => {
-		return b[1] - a[1];
-	});
-
-	let total_bytes = 0;
-	for (let i = 0; i < sum_langs_sort.length; i++) {
-		total_bytes += sum_langs_sort[i][1];
-	}
-
-	for (let i = 0; i < sum_langs_sort.length; i++) {
-		const percent = Math.round((sum_langs_sort[i][1] / total_bytes) * 10000) / 100;
-		text += "<tr><td>" + sum_langs_sort[i][0] + "</td><td><strong>" + percent + "%</strong></td><td>" + sum_langs_sort[i][1] + "</td></tr>";
-	}
-
 	if (!stat.failed || localStorage.getItem("langs_last_accessed")) {
-		text += "<tr><td>--</td><td><strong>100%</strong></td><td>" + total_bytes + "</td>";
+		let sum_langs_sort = [];
+		for (const lang in sum_langs) {
+			sum_langs_sort.push([lang, sum_langs[lang]]);
+		}
+		sum_langs_sort = sum_langs_sort.sort((a, b) => {
+			return b[1] - a[1];
+		});
+
+		let total_bytes = 0;
+		for (let i = 0; i < sum_langs_sort.length; i++) {
+			total_bytes += sum_langs_sort[i][1];
+		}
+
+		const rows = sum_langs_sort.map((lang) =>
+			"<tr><td>" + lang[0] + "</td><td><strong>"
+			+ (Math.round((lang[1] / total_bytes) * 10000) / 100) + "%</strong></td><td>"
+			+ lang[1] + "</td></tr>"
+		);
+
+		text += rows.join("") + "<tr><td>--</td><td><strong>100%</strong></td><td>" + total_bytes + "</td>";
 	}
 
 	lang_disp.innerHTML = text;
