@@ -39,15 +39,17 @@ async function getLangs() {
 }
 
 getLangs().then((stat) => {
-	let text = "<tr><th>Language</th><th>Percentage</th><th>Bytes</th></tr>";
-
+	let text;
 	let sum_langs;
+	let got_last_accessed = false;
 
 	if (stat.failed) {
 		console.log("Failed to access full API. Client may have been rate limited. Attempting to use last accessed data...");
 
 		const langs_last_accessed = localStorage.getItem("langs_last_accessed");
 		if (langs_last_accessed) {
+			got_last_accessed = true;
+
 			sum_langs = JSON.parse(langs_last_accessed);
 		} else {
 			text = "<tr><td>Failed to access API. Try again later.</td></tr>";
@@ -59,7 +61,7 @@ getLangs().then((stat) => {
 		sum_langs = stat.sum_langs;
 	}
 
-	if (!stat.failed || localStorage.getItem("langs_last_accessed")) {
+	if (!stat.failed || got_last_accessed) {
 		let sum_langs_sort = [];
 		for (const lang in sum_langs) {
 			sum_langs_sort.push([lang, sum_langs[lang]]);
@@ -79,7 +81,7 @@ getLangs().then((stat) => {
 			+ lang[1] + "</td></tr>"
 		);
 
-		text += rows.join("") + "<tr><td>--</td><td><strong>100%</strong></td><td>" + total_bytes + "</td>";
+		text = "<tr><th>Language</th><th>Percentage</th><th>Bytes</th></tr>" + rows.join("") + "<tr><td>--</td><td><strong>100%</strong></td><td>" + total_bytes + "</td>";
 	}
 
 	lang_disp.innerHTML = text;
