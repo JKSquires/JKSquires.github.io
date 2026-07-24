@@ -321,7 +321,7 @@
 <p>For example, <code>0x7000006</code> is M<sub>0A</sub>, <code>0x700000E</code> is M<sub>0B</sub>, <code>0x7000016</code> is M<sub>0C</sub>, <code>0x700001E</code> is M<sub>0D</sub>, <code>0x7000026</code> is M<sub>1A</sub>, <code>0x700002E</code> is M<sub>1B</sub>, <code>0x7000036</code> is M<sub>1C</sub>, <code>0x700003E</code> is M<sub>1D</sub>, and so on until <code>0x70003FE</code>, which is M<sub>31D</sub>.</p>
 <p>There are 32 matrices that can be applied to sprites (thus, <strong>M</strong><sub>0</sub> through <strong>M</strong><sub>31</sub>) and are referenced in OBJ attribute 1 bits 9-13. If you want the transformation to be applied to a sprite, bit 8 in OBJ attribue 0 must be set.</p>
 <p>One <em>very</em> important thing is that the rotation and scaling parameters store Q8.8 fixed-point values (this means the top 8 bits represent the integer part (signed) of the value and the bottom 8 bits represent the fractional part of the value).</p>
-<p>For example, <code>1</code> would be represented as <code>0b0000000100000000</code>, <code>-5</code> would be represented as <code>0b1000010100000000</code>, <code>0.5</code> would be represented as <code>0b0000000010000000</code>, <code>2.375</code> would be represented as <code>0b0000001001100000</code>, and so on.</p>
+<p>For example, <code>1</code> would be represented as <code>0b0000000100000000</code>, <code>-5</code> would be represented as <code>0b1111101011111111</code>, <code>0.5</code> would be represented as <code>0b0000000010000000</code>, <code>2.375</code> would be represented as <code>0b0000001001100000</code>, and so on.</p>
 <p>When you scale or rotate a sprite and parts of it exceed the bounds of the object, the parts that exceed are cut off and not rendered. To remedy this(at least partly) is to set the rotation and scaling double-size flag (bit 9 in OBJ attribute 0). This will double the width and height of the sprite's rendering area.</p>
 <p>Oh, and one more important thing: by default, <strong>M</strong> is completely zeroed out, which means that you won't be able to see the sprite properly, so you should probably set it to the 2x2 identity matrix at first (this means there will be no transformation).</p>
 <br>
@@ -397,7 +397,7 @@
 		<td>cos(30&deg;)</td>
 		<td>-0.5</td>
 		<td>0.8671875</td>
-		<td><code>0b1000000010000000</code></td>
+		<td><code>0b1111111110000000</code></td>
 		<td><code>0b0000000011011110</code></td>
 	</tr>
 </table>
@@ -899,16 +899,16 @@ mov r1,%0000000000000001 ; OBJ 0 attribute 2: start sprite at character 1, use c
 strh r1,[r0,0x4] ; OBJ 0 attribute 2 (0x7000004)
 
 ; set up the transformation matrix
-mov r1,%0000000010010011 ; 0.5cos(-pi/6) = ~111/256
+mov r1,%0000000010010011 ; (2/3) * cos(-pi/6) = ~147/256
 strh r1,[r0,0x6] ; M0A
 
-mvn r1,%0000000001010101 ; -0.5sin(-pi/6) = -64/256
+mvn r1,%0000000001010100 ; (2/3) * sin(-pi/6) = ~-85/256
 strh r1,[r0,0x0E] ; M0B
 
-mov r1,%0000000001010101 ; 0.5sin(-pi/6) = 64/256
+mov r1,%0000000001010101 ; (2/3) * -sin(-pi/6) = ~85/256
 strh r1,[r0,0x16] ; M0C
 
-mov r1,%0000000010010011 ; 0.5cos(-pi/6) = ~111/256
+mov r1,%0000000010010011 ; (2/3) * cos(-pi/6) = ~147/256
 strh r1,[r0,0x1E] ; M0D
 
 ; infinite loop
