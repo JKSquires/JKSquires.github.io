@@ -76,12 +76,12 @@ getLangs().then((stat) => {
 		}
 
 		const rows = sum_langs_sort.map((lang) =>
-			"<tr><td>" + lang[0] + "</td><td><strong>"
-			+ (Math.round((lang[1] / total_bytes) * 10000) / 100) + "%</strong></td><td>"
+			"<tr><td>" + lang[0] + '</td><td style="text-align:right;"><strong>'
+			+ (Math.round((lang[1] / total_bytes) * 10000) / 100) + '%</strong></td><td style="text-align:right;">'
 			+ lang[1] + "</td></tr>"
 		);
 
-		text = "<tr><th>Language</th><th>Percentage</th><th>Bytes</th></tr>" + rows.join("") + "<tr><td>--</td><td><strong>100%</strong></td><td>" + total_bytes + "</td>";
+		text = "<tr><th>Language</th><th>Percentage</th><th>Bytes</th></tr>" + rows.join("") + '<tr><td>--</td><td style="text-align:right;"><strong>100.00%</strong></td><td style="text-align:right;">' + total_bytes + "</td>";
 	}
 
 	lang_disp.innerHTML = text;
