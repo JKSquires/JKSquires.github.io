@@ -1,0 +1,19 @@
+#legome {
+	width: 256px;
+	height: 256px;
+
+	background-image: url("./legome.jpg");
+	background-size: 512px;
+	background-position: 50% 10%;
+
+	border-radius: 50%;
+
+	transition:
+		background-size 0.33s,
+		border-radius 0.33s;
+}
+#legome:hover {
+	background-size: 256px;
+
+	border-radius: 8%;
+}
