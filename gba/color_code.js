@@ -64,6 +64,11 @@ code_text = code_text.map((t) => {
 					return createColorTextObject(sec, "#900");
 				}
 
+				// check for label
+				if (sec[sec.length - 1] == ':') {
+					return createColorTextObject(sec, "#029");
+				}
+
 				return createColorTextObject(sec, "#000");
 			});
 		}
