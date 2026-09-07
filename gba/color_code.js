@@ -55,9 +55,9 @@ code_text = code_text.map((t) => {
 			// color the text before comments
 			line[0] = line[0].map((sec) => {
 				// check for number (dec, hex, bin)
-				if ((sec[0] == '%' || sec[0] == '$') || /^[0-9]/.test(sec) || sec.length > 1 && (sec.substring(0,2) == "0x" || sec.substring(0,2) == "0b")) {
+				if ((sec[0] == '%' || sec[0] == '$' || sec[0] == '#') || /^[0-9]/.test(sec) || sec.length > 1 && (sec.substring(0,2) == "0x" || sec.substring(0,2) == "0b")) {
 					return createColorTextObject(sec, "#090");
-				} // still need to check for decimal numbers
+				}
 
 				// check for register
 				if (/^r+[0-9]/.test(sec)) {
